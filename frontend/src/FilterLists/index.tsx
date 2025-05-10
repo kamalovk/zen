@@ -10,12 +10,12 @@ import { type cfg } from '../../wailsjs/go/models';
 import './index.css';
 
 import { AppToaster } from '../common/toaster';
+import { useProxyState } from '../context/ProxyStateContext';
 
 import { CreateFilterList } from './CreateFilterList';
 import { ExportFilterList } from './ExportFilterList';
 import { ImportFilterList } from './ImportFilterList';
 import { FilterListType } from './types';
-import { useProxyState } from '../context/ProxyStateContext';
 
 export function FilterLists() {
   const { t } = useTranslation();

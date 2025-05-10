@@ -1,4 +1,5 @@
-import { createContext, useContext, ReactNode, useState } from 'react';
+import { createContext, useContext, ReactNode, useState, useMemo } from 'react';
+
 import { ProxyState } from '../types';
 
 type ProxyStateContextType = {
@@ -9,21 +10,27 @@ type ProxyStateContextType = {
 
 const ProxyStateContext = createContext<ProxyStateContextType | undefined>(undefined);
 
-export const ProxyStateProvider = ({ children }: { children: ReactNode }) => {
+export function ProxyStateProvider({ children }: { children: ReactNode }) {
   const [proxyState, setProxyState] = useState<ProxyState>('off');
   const isProxyRunning = proxyState === 'on' || proxyState === 'loading';
 
-  return (
-    <ProxyStateContext.Provider value={{ proxyState, setProxyState, isProxyRunning }}>
-      {children}
-    </ProxyStateContext.Provider>
+  // Memoize the context value to prevent unnecessary re-renders
+  const contextValue = useMemo(
+    () => ({
+      proxyState,
+      setProxyState,
+      isProxyRunning,
+    }),
+    [proxyState, isProxyRunning],
   );
-};
 
-export const useProxyState = () => {
+  return <ProxyStateContext.Provider value={contextValue}>{children}</ProxyStateContext.Provider>;
+}
+
+export function useProxyState() {
   const context = useContext(ProxyStateContext);
   if (context === undefined) {
     throw new Error('useProxyState must be used within a ProxyStateProvider');
   }
   return context;
-};
+}

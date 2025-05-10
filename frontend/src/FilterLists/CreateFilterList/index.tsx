@@ -5,10 +5,9 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import { AddFilterList } from '../../../wailsjs/go/cfg/Config';
 import { AppToaster } from '../../common/toaster';
-import { FilterListType } from '../types';
-
-import './index.css';
 import { useProxyState } from '../../context/ProxyStateContext';
+import { FilterListType } from '../types';
+import './index.css';
 
 export function CreateFilterList({ onAdd }: { onAdd: () => void }) {
   const { t } = useTranslation();

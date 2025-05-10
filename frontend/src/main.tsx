@@ -4,8 +4,8 @@ import { createRoot } from 'react-dom/client';
 
 import App from './App';
 import { ThemeProvider } from './common/ThemeManager';
-import ErrorBoundary from './ErrorBoundary';
 import { ProxyStateProvider } from './context/ProxyStateContext';
+import ErrorBoundary from './ErrorBoundary';
 import { initI18n } from './i18n';
 import './style.css';
 
